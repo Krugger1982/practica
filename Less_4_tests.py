@@ -81,6 +81,10 @@ class TestCase(unittest.TestCase):
             self.assertEqual(Control_list[0][i],Test_lists[0][i])
         for i in range(len(Control_list[1])):
             self.assertEqual(Control_list[1][i],Test_lists[1][i])
+        # а в конце - уборка
+        del_dir(path1 +'/dir_2.1')
+        del_dir(path1 +'/dir_2.2')
+        del_dir('dir_1')
             
 if __name__ == '__main__':
     try: unittest.main()
