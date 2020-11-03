@@ -14,11 +14,13 @@ def crawl (dir_adress='.'):
 
 
 def del_dir(dir_adress='.'):
-    for root, dirs, files in os.walk(dir_adress):
-        try:
-            if len(dirs) == 0:
-                for file in files:
-                    os.remove(dir_adress + '/' + file)
+    try:
+        content = crawl (dir_adress)
+        files = content[0]
+        dirs = content[1]
+        if len(dirs) == 0:
+            for file in files:
+                os.remove(dir_adress + '/' + file)
             os.rmdir(dir_adress)
-        except OSError:
-            return 'deleting is impossible'
+    except OSError:
+        return 
