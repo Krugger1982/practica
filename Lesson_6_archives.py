@@ -4,13 +4,14 @@ import os.path
 def selection(Name, extension):
     with ZipFile('result.zip', 'a') as result:
         with ZipFile(Name) as archive:                                  # Открываем исходный архив
-            list_ = archive.namelist()                                  # Срздадим оглавление исходного архива
+            list_ = archive.namelist()                                  # Создадим оглавление исходного архива
             for file in list_:                                          
                 if file.find('.' + extension) != -1 and '/' in file:    # пробежав по оглавлению найдем сперва  файлы c нужным расширением во вложенных каталогах
                     NewName = file.split('/')
-                    archive.extract(file)                               # Для переноса в другой каталог их придется эксрактировать (извлечь) в текущий каталог
+                    archive.extract(file)                               # Для переноса в другой каталог их придется экстрактировать (извлечь) в текущий каталог
                     result.write(file, arcname=NewName[-1])             # Занесем их в результирующий архив (будет создан заново) с "отрезанным" путем
                     os.remove(file)                                     # и подчистим их в текущем каталоге
+                    
                 elif file.find('.' + extension) != -1:                  # Затем поищем нужные файлы в корне исходного каталога
                     archive.extract(file)
                     result.write(file)
